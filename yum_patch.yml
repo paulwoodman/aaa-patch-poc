@@ -1,0 +1,9 @@
+---
+- name: Patching playbook
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: yum patching
+      include_role:
+       name: yum_patch
