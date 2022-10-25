@@ -1,0 +1,9 @@
+---
+- name: Patching playbook
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Rollback pacthing
+      include_role:
+       name: rollback_patch

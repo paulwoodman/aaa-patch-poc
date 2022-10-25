@@ -1,0 +1,16 @@
+- name: Get id number for last update
+  shell: yum history | sed -n 4p | awk -F "|" '{ print $1 }' | tr -d ' '
+  register: transaction_id 
+
+- debug:
+    var: transaction_id.stdout
+
+- name: get info on that transaction
+  command: yum history info {{ transaction_id.stdout }} 
+  register: transaction_info
+
+- debug:
+    var: transaction_info.stdout_lines
+
+- name: Rollback the last yum install/update
+  command: yum -y history undo {{ transaction_id.stdout }}
